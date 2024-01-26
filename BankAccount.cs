@@ -8,9 +8,16 @@ namespace ClassesAndObjects
 {
     public class BankAccount
     {
-        public string Number { get; }
+        public string AccountNumber { get; }
         public string Owner { get; set; }
         public decimal Balance { get; }
+
+        public BankAccount(string name, decimal initialBalance)
+        {
+            Owner = name;
+            Balance = initialBalance;
+        }
+
 
         public void MakeDeposit(decimal Amount, DateTime date, string note)
         {
