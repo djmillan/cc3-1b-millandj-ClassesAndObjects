@@ -8,6 +8,7 @@ namespace ClassesAndObjects
 {
     public class BankAccount
     {
+        private static int s_accountNumberSeed = 1234567890;
         public string AccountNumber { get; }
         public string Owner { get; set; }
         public decimal Balance { get; }
@@ -16,6 +17,8 @@ namespace ClassesAndObjects
         {
             Owner = name;
             Balance = initialBalance;
+            AccountNumber = s_accountNumberSeed.ToString();
+            s_accountNumberSeed++;
         }
 
 
