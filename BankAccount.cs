@@ -55,5 +55,19 @@ namespace ClassesAndObjects
             _allTransactions.Add(withdraw);
         }
 
+        public string GetAccountHistory()
+        {
+            StringBuilder report = new System.Text.StringBuilder();
+
+            decimal balance = 0;
+            report.AppendLine("Date\t\tTime\tAmount\tBalance\tNote");
+            foreach (Transaction transaction in _allTransactions)
+            {
+                balance += transaction.Amount;
+                report.AppendLine($"{transaction.Date.ToShortDateString()}\t{transaction.Date:HH:mm}\t{transaction.Amount}\t{balance}\t{transaction.Notes}");
+            }
+            return report.ToString();
+        }
+
     }
 }

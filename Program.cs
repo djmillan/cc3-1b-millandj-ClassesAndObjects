@@ -6,63 +6,64 @@
 
         static void Main(string[] args)
         {
-            while(true)
-            {
-            Console.Write("Enter your name >> ");
-            string user = Console.ReadLine();
-            Console.Write("Enter your initial balance >> ");
-            decimal ibal = Convert.ToDecimal(Console.ReadLine());
-            BankAccount account = new BankAccount(user,ibal);
-            Console.WriteLine($"{account.AccountNumber} | {account.Owner} | ${account.Balance}");
-            Console.Write("Withdraw/Deposit >> ");
-                string note;
-            string opt = Console.ReadLine();
-            if (opt.Equals("Withdraw"))
-            {
-                Console.Write("Enter the amount of withdrawal >> ");
-                decimal withdrawal = Convert.ToDecimal(Console.ReadLine());
+            //while (true)
+            //{
+                try
+                {
+                    Console.Write("Enter your name >> ");
+                    string name = Console.ReadLine();
+                    Console.Write("Enter your initial balance >> ");
+                    decimal inbal = Convert.ToDecimal(Console.ReadLine()); //Initial balance
+                    BankAccount account = new BankAccount(name, inbal);
+                    Console.WriteLine($"Account {account.AccountNumber} was created for {account.Owner} with ${account.Balance} initial balance");
+                    Console.Write("Withdraw/Deposit >> ");
+                    string note;
+                    string option = Console.ReadLine();
+                    if (option.Equals("Withdraw"))
+                    {
+                        Console.Write("Enter the amount of withdrawal >> ");
+                        decimal withdrawal = Convert.ToDecimal(Console.ReadLine());
 
-                Console.Write("Input a note >> ");
-                note = Console.ReadLine();
-                account.MakeWithdrawal(withdrawal, DateTime.Now, note);
+                        Console.Write("Input a note >> ");
+                        note = Console.ReadLine();
+                        account.MakeWithdrawal(withdrawal, DateTime.Now, note);
 
-            }
-            else if (user.Equals("Deposit"))
-            {
-                Console.Write("Enter the amount of deposit >> ");
-                decimal deposit = Convert.ToDecimal(Console.ReadLine());
+                    }
+                    else if (option.Equals("Deposit"))
+                    {
+                        Console.Write("Enter the amount of deposit >> ");
+                        decimal deposit = Convert.ToDecimal(Console.ReadLine());
 
-                Console.Write("Input a note >> ");
-                note = Console.ReadLine();
-                account.MakeDeposit(deposit, DateTime.Now, note);
-            }
-            BankAccount invalidAccount;
-            try
-            {
-                invalidAccount = new BankAccount("Invalid", -55);
-            } 
-            catch (ArgumentOutOfRangeException e)
-            {
-                Console.WriteLine("Exception caught creating account with negative balance.");
-                Console.WriteLine(e.Message);
-                return;
-            }
-            
-            Console.Write("Do you want to continue? >> ");
-            string option = Console.ReadLine();
-            if(option.Equals("yes"))
+                        Console.Write("Input a note >> ");
+                        note = Console.ReadLine();
+                        account.MakeDeposit(deposit, DateTime.Now, note);
+                    }
+                    Console.WriteLine(account.GetAccountHistory());
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine("Exception caught creating account with negative balance.");
+                    Console.WriteLine(e.Message);
+                    return;
+                }
+                /*
+                Console.Write("Do you want to continue? >> ");
+                string option1 = Console.ReadLine();
+                if (option1.Equals("yes"))
                 {
                     continue;
                 }
-            else if(option.Equals("no"))
+                else if (option1.Equals("no"))
                 {
                     break;
                 }
-            else
+                else
                 {
                     break;
                 }
-            }
+                */
+
+            //}
 
         }
     }
