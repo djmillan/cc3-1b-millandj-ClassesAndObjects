@@ -1,4 +1,6 @@
-﻿namespace ClassesAndObjects
+﻿using System.Xml.Linq;
+
+namespace ClassesAndObjects
 {
     internal class Program
     {
@@ -10,11 +12,34 @@
             //{
                 try
                 {
+            GiftCardAccount giftCard = new GiftCardAccount("Gift card", 100, 50);
+            giftCard.MakeWithdrawal(20, DateTime.Now, "Get Expensive Coffee");
+            giftCard.MakeWithdrawal(50, DateTime.Now, "But Groceries");
+            giftCard.PerformMonthEndTransactions();
+            // Can make additional deposits
+            giftCard.MakeDeposit(27.50m, DateTime.Now, "Add funds for spending money");
+            Console.WriteLine("Balance of gift card " + giftCard.Balance);
+                var savings = new InterestEarningAccount("Savings account", 10000);
+                savings.MakeDeposit(750, DateTime.Now, "Save same money");
+                savings.MakeDeposit(1250, DateTime.Now, "Add more savings");
+                savings.MakeWithdrawal(250, DateTime.Now, "For monthly bills");
+                savings.PerformMonthEndTransactions();
+                Console.WriteLine("Current savings balance: " + savings.Balance);
+
+                var lineOfCredit = new LineOfCreditAccount("Line of credit", 0, 2000);
+                // how much is too much to borrow?
+                lineOfCredit.MakeWithdrawal(1000, DateTime.Now, "Take out monthly advance");
+                lineOfCredit.MakeDeposit(50m, DateTime.Now, "Pay back small amount");
+                lineOfCredit.MakeWithdrawal(5000m, DateTime.Now, "Emergency funds for repairs");
+                lineOfCredit.MakeDeposit(150m, DateTime.Now, "partial restoration of repairs");
+                lineOfCredit.PerformMonthEndTransactions();
+                Console.WriteLine("Current line of credit: " + lineOfCredit.Balance);
+
                     Console.Write("Enter your name >> ");
                     string name = Console.ReadLine();
                     Console.Write("Enter your initial balance >> ");
-                    decimal inbal = Convert.ToDecimal(Console.ReadLine()); //Initial balance
-                    BankAccount account = new BankAccount(name, inbal);
+                    decimal initialBalance = Convert.ToDecimal(Console.ReadLine()); //Initial balance
+                    BankAccount account = new BankAccount(name, initialBalance);
                     Console.WriteLine($"Account {account.AccountNumber} was created for {account.Owner} with ${account.Balance} initial balance");
                     Console.Write("Withdraw/Deposit >> ");
                     string note;
